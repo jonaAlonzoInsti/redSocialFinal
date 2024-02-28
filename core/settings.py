@@ -250,13 +250,8 @@ if not DEBUG:
 
     ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
     ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 3600
-
-    ACCOUNT_RATE_LIMITS = {
-    'login_failed': {
-        'limit': 5,
-        'timeout': 3600,
-    }
-}
+    ACCOUNT_RATE_LIMITS['login_failed']
+    
 
 
     # django-ckeditor will not work with S3 through django-storages without this line in settings.py
