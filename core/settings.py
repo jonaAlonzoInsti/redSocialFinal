@@ -250,7 +250,7 @@ if not DEBUG:
 
     ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
     ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 3600
-    ACCOUNT_RATE_LIMITS['login_failed']
+    ACCOUNT_RATE_LIMITS=['login_failed']
     
 
 
