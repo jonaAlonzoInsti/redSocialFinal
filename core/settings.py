@@ -228,7 +228,12 @@ ALLOWED_HOSTS = [
 ]
 ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 3600
-ACCOUNT_RATE_LIMITS=['login_failed']
+ACCOUNT_RATE_LIMITS = {
+    'login_failed': {
+        'LIMIT': 5,  # Número máximo de intentos de inicio de sesión fallidos permitidos
+        'WINDOW': 3600,  # Ventana de tiempo (en segundos) para el límite de intentos de inicio de sesión fallidos
+    }
+}
 
 RENDER_EXTERNAL_HOSTSNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTSNAME:
