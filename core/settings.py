@@ -233,8 +233,8 @@ if not DEBUG:
     EMAIL_HOST = 'redsocialconfirmacion@gmail.com'
     EMAIL_HOST_USER = env('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-    EMAIL_PORT = env('EMAIL_PORT')
-    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
 
     SESSION_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
