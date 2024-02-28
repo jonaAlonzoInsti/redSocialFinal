@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 import environ 
 from dotenv import load_dotenv
+import dj_database_url
 
 
 load_dotenv()
@@ -145,7 +146,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     "default": env.db("DATABASE_URL", default="postgres:///social"),
 }
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
+# DATABASES["default"]["ATOMIC_REQUESTS"] = True
+DATABASES["default"]=dj_dtabase_url.parse("postgres://admin:K5TIOnSc8twIxQw8Vw86ogQtuCw3SHlL@dpg-cnffd0qcn0vc73e7i8qg-a.oregon-postgres.render.com/social_suqs")
 
 PASSWORD_HASHERS = [
     # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
