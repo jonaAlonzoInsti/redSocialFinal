@@ -14,6 +14,7 @@ ENVIRONMENT = env
 #para una vaariable de entorno en windows solo se puede marcar el camino no un comando
 # NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
+NODE_ENV='production tailwindcss --postcss -i ./src/styles.css -o ../static/css/dist/styles.css --minify'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
