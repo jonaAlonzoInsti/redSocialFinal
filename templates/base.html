@@ -1,0 +1,60 @@
+{% load static %}
+{% load tailwind_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% tailwind_css %} 
+
+    <!--Favicon-->
+
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+
+    <!--Boxicons-->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+
+    <!--JQuery-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const div = document.getElementById('miDiv');
+            
+            body.classList.toggle('dark');
+            div.classList.toggle('dark:bg-gray-800');
+        }        
+    </script>
+
+    
+    {% block extra_head %}{% endblock extra_head %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body class="flex justify-center to-black">
+
+    {% block navbar %}{% endblock navbar %}
+
+    <div class="flex justify-center h-screen">
+        <!--left sidebar-->
+        <div class="fixed top-0 left-0 flex-col hidden w-1/5 h-full pt-16 xl:flex">
+        {% block left_sidebar %}{% endblock left_sidebar %}
+        </div>
+
+        <!--main content-->
+        <div class="w-full px-2 pt-32 lg:w-2/3 xl:w-2/5 lg:pt-16">
+        {% include 'messages.html' %}
+        {% block content %}{% endblock content %}
+        </div>
+
+        <div class="fixed top-0 right-0 hidden w-1/5 h-full px-4 pt-16 xl:block">
+        {% block right_sidebar %}{% endblock right_sidebar %}
+        </div>
+    </div>
+    <!--FOOTER-->
+
+    {% block javascript %}{% endblock javascript %}
+</body>
+</html>

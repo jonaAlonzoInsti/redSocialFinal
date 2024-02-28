@@ -1,0 +1,62 @@
+from django import forms
+from .models import SocialPost, SocialComment
+from django.forms import formset_factory
+
+
+class ImageUploadForm(forms.Form):
+    image = forms.ImageField()
+
+# Crear un FormSet para ImageUploadForm
+from django.forms import formset_factory
+ImageFormSet = formset_factory(ImageUploadForm, extra=3)
+
+
+
+
+
+class SocialPostForm(forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(attrs={
+            'class': 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-dark-third dark:border-dark-third dark:text-dark-txt flex max-w-full sm:text-sm border-gray-300 rounded-md',
+            'rows': '3',
+            'placeholder': 'Say Something...'
+            }),
+        required=True)
+    image = forms.ImageField(widget=forms.ClearableFileInput(attrs={
+        'class': 'relative dark:text-dark-txt dark:bg-dark-second cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'
+        }),
+        required=True
+        )
+    # image = forms.FileField(widget=forms.ClearableFileInput(attrs={
+    #     'class': 'relative dark:text-dark-txt dark:bg-dark-second cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500',
+    #     'multiple': True
+    #     }),
+    #     required=False
+    #     )
+
+    class Meta:
+        model=SocialPost
+        fields=['body', 'image']
+
+class SocialCommentForm(forms.ModelForm):
+    comment = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-dark-third dark:border-dark-third dark:text-dark-txt flex max-w-full sm:text-sm border-gray-300 rounded-md',
+            'rows': '1',
+            'placeholder': 'Comment Something...'
+            }),
+        required=True
+        )
+
+    class Meta:
+        model=SocialComment
+        fields=['comment']
+
+class ShareForm(forms.Form):
+    body = forms.CharField(
+        label='',
+        widget=forms.Textarea(attrs={
+            'class': 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-dark-third dark:border-dark-third dark:text-dark-txt flex max-w-full sm:text-sm border-gray-300 rounded-md',
+            'rows': '3',
+            'placeholder': 'Say Something...'
+            }),
+        )

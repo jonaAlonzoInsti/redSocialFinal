@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tailwind_tags %}
+{% load tailwind_filters %}
+
+{% block title %}{{user.username}} Details{% endblock title %}
+{% block extra_head %}{% endblock extra_head %}
+
+<!-- NAVBAR -->
+{% block navbar %}
+{% include 'components/navbar.html' %}
+{% endblock navbar %}
+
+
+<!-- MAIN -->
+<!-- left sidebar -->
+{% block left_sidebar %}
+{% include 'components/sidebars/left/sidebar.html' %}
+{% endblock left_sidebar %}
+
+<!-- main content -->
+{% block content %}
+<div class="max-w-full px-4 py-5 bg-white shadow dark:bg-dark-second sm:rounded-lg sm:p-6">
+
+    <div class="max-w-full px-4 py-5 mb-2 bg-white border-b border-gray-200 rounded-lg dark:bg-dark-third dark:border-dark-second sm:px-6">
+        
+        <h3 class="heading">
+        {{profile.user.username}}'s' Followers
+        </h3>
+
+        {% comment %} <p class="mt-1 text-sm text-gray-500 cursor-default dark:text-dark-txt">
+        People who are following {{profile.user.username}}. Follow this user and see their posts in your feed.
+        Hint: To follow a user visit their <span class="font-bold">Profile page</span> and click <span class="font-bold">Follow</span>
+        </p> {% endcomment %}
+    </div> 
+
+
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <ul class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <!-- LLamamos aL CONTEXTO DE LA VISTA FOLLOWER -->
+    {% for follower in followers %}
+        <li class="flex flex-col col-span-1 text-center bg-white rounded-lg shadow dark:bg-dark-main ">
+            {% comment %} <div class="flex flex-col flex-1 p-8">
+            {% if follower.picture %}
+            <!-- mostramos la imagen del seguidor -->
+                <img class="flex-shrink-0 w-32 h-32 mx-auto bg-white rounded-full dark:bg-dark-second" src="{{follower.profile.picture.url}}" alt="">
+            {% else %}
+            <!-- mostramos la imagen por defecto -->
+                <img class="flex-shrink-0 w-32 h-32 mx-auto bg-white rounded-full dark:bg-dark-second" src="{% static 'user_default_profile.png' %}" alt="">
+            {% endif %}
+            <!-- nombre del seguidor -->
+                <h3 class="mt-6 text-lg font-bold prose text-gray-900 cursor-default dark:text-dark-txt">{{follower.profile.user.username}}</h3>
+            </div> {% endcomment %}
+
+            
+
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <table class="table-auto">
+            <thead>
+                <tr>
+                <th class="px-4 py-2">Seguidor</th>
+                <th class="px-4 py-2">Ver</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for follower in followers %}
+                <tr>
+                <td class="px-4 py-2 border">{{ follower.profile.user.username }}</td>
+                <td class="px-4 py-2 border">
+                    <a href="{% url 'users:profile' username=follower.profile.user.username %}" class="my-custom-link-style">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="imgSeguidor" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    </a>
+                </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+            
+            
+            
+                
+                    {% comment %} BORRADO {% endcomment %}
+                    {% comment %} <div class="flex flex-1 w-0 -ml-px">
+                        <a href="#" class="relative inline-flex items-center justify-center flex-1 w-0 py-4 text-sm font-medium text-gray-700 border border-transparent rounded-br-lg dark:hover:bg-dark-second hover:text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </a>
+                    </div>  {% endcomment %}
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+  
+</div>
+
+
+<!--PAGINATION-->
+<nav class="flex items-center justify-between px-4 sm:px-0">
+    {% if followers.has_previous %}
+    <div class="flex flex-1 w-0 -mt-px">
+        <a href="?page={{ followers.previous_page_number }}" class="inline-flex items-center pt-4 pr-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300">
+        <!-- Heroicon name: solid/arrow-narrow-left -->
+        <svg class="w-5 h-5 mr-3 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        Previous
+        </a>
+    </div>
+    {% endif %}
+        
+    {% if follower in followers %}
+    {% for i in followers.paginator.page_range %}
+        {% if followers.number == i %}        
+        <div class="inline-flex items-center px-4 pt-4 text-sm font-medium text-indigo-600 border-t-2 border-indigo-500 cursor-default" aria-current="page">
+        {{i}}
+        </div>
+        {% else %}
+        <a href="?page={{ i }}" class="inline-flex items-center px-4 pt-4 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300">
+        {{i}}
+        </a>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    {% if followers.has_next %}
+    <div class="flex justify-end flex-1 w-0 -mt-px">
+        <a href="?page={{ followers.next_page_number }}" class="inline-flex items-center pt-4 pl-1 text-sm font-medium text-gray-500 border-t-2 border-transparent hover:text-gray-700 hover:border-gray-300">
+        Next
+        <!-- Heroicon name: solid/arrow-narrow-right -->
+        <svg class="w-5 h-5 ml-3 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+        </a>
+    </div>
+    {% endif %}
+</nav>
+<!--/END PAGINATION-->
+
+{% endblock content %}
+
+<!-- right content -->
+{% block right_sidebar %}
+{% endblock right_sidebar %}
+
+
+<!-- FOOTER -->
+{% block footer %}
+
+{% endblock footer %}
+
+
+{% block javascript %}{% endblock javascript %}

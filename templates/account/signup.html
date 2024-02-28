@@ -1,0 +1,51 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% load tailwind_filters %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<div class="flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <img class="w-auto h-12 mx-auto" src="{% static 'img/ali.jpg' %}"  alt="Workflow">
+    <h2 class="mt-6 text-3xl font-extrabold text-center text-gray-900">
+      Already havve an account?
+    </h2>
+    <p class="mt-2 text-sm text-center text-gray-600">
+      Or
+      <a href="{% url 'account_login' %}" class="font-medium text-indigo-600 hover:text-indigo-500">
+        Login
+      </a>
+    </p>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">  
+      <!--FORM-->
+      <form class="space-y-6"  id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            Email address
+          </label>
+        {% load crispy_forms_tags %}
+
+        <div class="mt-1">
+            {{ form|crispy }}
+        </div>
+
+        <div>
+          <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Register
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

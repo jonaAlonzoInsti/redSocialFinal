@@ -1,0 +1,43 @@
+{% load static %}
+
+{% comment %} ITEMS lateral derecho {% endcomment %}
+<ul class="p-4">
+    {% comment %} Perfil USER {% endcomment %}
+    {% if not user.is_authenticated %}
+        <li>
+            <a href="" class="flex items-center p-2 space-x-2 transition-all rounded-lg hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third">
+                <img src="{% static 'img/gato2.gif' %}"  alt="Profile picture" class="w-10 h-10 rounded-full">
+                <span class="font-semibold">GATO</span>
+            </a>
+        </li>
+    {% else %}
+    <li>
+        <a href="{% url 'users:profile' user.username %}" class="flex items-center p-2 space-x-2 transition-all rounded-lg hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third">
+            
+
+
+            <img src="{{user.profile.picture.url}}" alt="Profile picture" class="w-10 h-10 rounded-full">
+            <span class="font-semibold">{{user.username}}</span>
+        </a>
+    </li>
+    {% endif %}
+    {% comment %} Ver amigos {% endcomment %}
+    {% if user.is_authenticated %}
+        <li>
+            <a href="{% url 'users:followers-list' user.profile.pk %}" class="flex items-center p-2 space-x-2 transition-all rounded-lg hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third dark:focus:bg-dark-second">
+                <i class='text-gray-500 bx bx-group'></i>
+                <span class="font-semibold">Seguidores</span>
+            </a>
+        </li>
+    {% endif %}
+    {% comment %}  Elemmento de lista, por si se quiere agg mas acciones
+     <li>
+        <a href="#" class="flex items-center p-2 space-x-2 transition-all rounded-lg hover:bg-gray-200 dark:text-dark-txt dark:hover:bg-dark-third">
+            <span class="grid w-10 h-10 bg-gray-300 rounded-full place-items-center dark:bg-dark-second">
+                <i class='bx bx-chevron-down'></i>
+            </span>
+            <span class="font-semibold">See more</span>
+        </a>
+    </li> {% endcomment %}
+    <li class="mt-6 border-b border-gray-200 dark:border-dark-third"></li>
+</ul>

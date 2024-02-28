@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tailwind_tags %}
+{% load tailwind_filters %}
+{% load humanize %}
+{% block title %}Homepage{% endblock title %}
+{% block extra_head %}{% endblock extra_head %}
+<!-- NAVBAR -->
+{% block navbar %}
+{% include 'components/navbar.html' %}
+{% endblock navbar %}
+<!-- MAIN -->
+<!-- left sidebar -->
+{% block left_sidebar %}
+{% include 'components/sidebars/left/sidebar.html' %}
+{% endblock left_sidebar %}
+<!-- main content -->
+{% block content %}
+
+<p class="text-rose-200">Gato Busqueda user</p>
+
+<div class="containerBusqueda">
+  <h1 class="heading">Search Results</h1>
+
+  <!-- Barra de búsqueda -->
+  <div class="search-form">
+    <form action="{% url 'social:profile-search' %}" method="GET" class="flex items-center border border-gray-300 rounded-lg">
+      <input type="text" name="query" placeholder="Search..." class="search-input" value="{{ request.GET.query }}">
+      <button type="submit" class="search-button">Search</button>
+    </form>
+  </div>
+  
+  <!-- Mostrar perfiles encontrados -->
+  <div class="profiles">
+    <h2 class="heading">Profiles</h2>
+    <table class="profile-table">
+      
+      <tbody>
+        
+        {% for profile in profile_list %}
+          <tr>
+            <td>
+              <a href="{% url 'users:profile' username=profile.user.username %}" class="profile-name">{{ profile.user.username }}</a>
+            </td>
+            <td>
+              {% if profile.picture %}
+                <img alt="{{ profile.user.username }}" class="profile-image" src="{{ profile.picture.url }}">
+              {% else %}
+              <a href="{% url 'account_login' %}"   class="inline-block md:hidden">
+                <img src="img/ali.jpg" class="w-10 h-10">
+              </a>
+              {% endif %}
+            </td>
+            <td>
+              <h1 class="bioTitle">Biografia</h1>
+              {{ profile.bio }}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="3">No profiles found.</td>
+          </tr>
+        {% endfor %}
+              
+              
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+        {% endblock content %}
+
+        <!-- right content -->
+        {% block right_sidebar %}
+        {% endblock right_sidebar %}
+
+        <!-- FOOTER -->
+        {% block footer %}
+
+        {% endblock footer %}
+
+        {% block javascript %}{% endblock javascript %}
