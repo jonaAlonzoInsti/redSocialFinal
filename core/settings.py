@@ -12,7 +12,7 @@ environ.Env.read_env()
 ENVIRONMENT = env
 
 #para una vaariable de entorno en windows solo se puede marcar el camino no un comando
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+# NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
