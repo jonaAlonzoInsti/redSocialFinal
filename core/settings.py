@@ -151,9 +151,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": env.db("DATABASE_URL", default="postgres:///social"),
-# }
+DATABASES = {
+    "default": env.db("DATABASE_URL", default="postgres:///social"),
+}
 # DATABASES["default"]["ATOMIC_REQUESTS"] = True
 DATABASES["default"]=dj_database_url.parse("postgres://admin:K5TIOnSc8twIxQw8Vw86ogQtuCw3SHlL@dpg-cnffd0qcn0vc73e7i8qg-a.oregon-postgres.render.com/social_suqs")
 
