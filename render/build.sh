@@ -1,6 +1,6 @@
 set -o errexit -o nounset -o pipefail
 pip install -r requirements.txt
-npm install
+# npm install
 npm install -g tailwindcss
 # db-migrate -e prod up
 # python manage.py tailwind start
