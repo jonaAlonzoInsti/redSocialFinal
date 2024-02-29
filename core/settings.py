@@ -37,7 +37,7 @@ if RENDER_EXTERNAL_HOSTSNAME:
      ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTSNAME) 
 # Application definition
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
@@ -290,7 +290,7 @@ if not DEBUG:
     # AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
     # AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
     
-    AWS_STORAGE_BUCKET_NAME ='AWS_STORAGE_BUCKET_NAME'
+    # AWS_STORAGE_BUCKET_NAME ='AWS_STORAGE_BUCKET_NAME'
 
 
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
