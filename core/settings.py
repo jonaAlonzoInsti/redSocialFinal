@@ -37,6 +37,9 @@ if RENDER_EXTERNAL_HOSTSNAME:
      ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTSNAME) 
 # Application definition
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 COMPRESS_ENABLED = False
 
 STATICFILES_FINDERS = (
