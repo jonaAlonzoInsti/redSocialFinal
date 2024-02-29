@@ -37,6 +37,15 @@ if RENDER_EXTERNAL_HOSTSNAME:
      ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTSNAME) 
 # Application definition
 
+COMPRESS_ENABLED = False
+
+STATICFILES_FINDERS = (
+    # 'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
+
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
