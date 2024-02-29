@@ -40,12 +40,6 @@ if RENDER_EXTERNAL_HOSTSNAME:
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-COMPRESS_ENABLED = False
-
-STATICFILES_FINDERS = (
-    # 'compressor.finders.CompressorFinder',
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
 
 
 
@@ -116,6 +110,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    #render
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
 
@@ -156,9 +151,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///social"),
-}
+# DATABASES = {
+#     "default": env.db("DATABASE_URL", default="postgres:///social"),
+# }
 # DATABASES["default"]["ATOMIC_REQUESTS"] = True
 DATABASES["default"]=dj_database_url.parse("postgres://admin:K5TIOnSc8twIxQw8Vw86ogQtuCw3SHlL@dpg-cnffd0qcn0vc73e7i8qg-a.oregon-postgres.render.com/social_suqs")
 
@@ -207,15 +202,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-
+#render
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_TMP os.pathjoin(BASE_DIR, 'static')
 
+
+COMPRESS_ENABLED = False
+
+STATICFILES_FINDERS = (
+    # 'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
+
+#render
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Confirmacion Correo Consola
